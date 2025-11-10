@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Statistics
 {
@@ -12,28 +13,19 @@ namespace Statistics
 
     public class StatsComputer
     {
-        public Stats CalculateStatistics(List<float> numbers)
+        public Stats CalculateStatistics(List<float> temperaturesFahrenheit)
         {
             var stats = new Stats();
-            if (numbers == null || numbers.Count == 0)
+            if (temperaturesFahrenheit == null || temperaturesFahrenheit.Count == 0)
             {
                 stats.average = Double.NaN;
                 stats.min = Double.NaN;
                 stats.max = Double.NaN;
                 return stats;
             }
-            double sum = 0;
-            double min = Double.MaxValue;
-            double max = Double.MinValue;
-            foreach (var num in numbers)
-            {
-                sum += num;
-                if (num < min) min = num;
-                if (num > max) max = num;
-            }
-            stats.average = sum / numbers.Count;
-            stats.min = min;
-            stats.max = max;
+            stats.average = temperaturesFahrenheit.Average();
+            stats.min = temperaturesFahrenheit.Min();
+            stats.max = temperaturesFahrenheit.Max();
             return stats;
         }
     }
